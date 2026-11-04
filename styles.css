@@ -1,0 +1,117 @@
+
+/* =================================
+   1. ESTILOS GENERALES
+================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F8F5EC;
+    color: #283618;
+    line-height: 1.6;
+}
+
+.contenedor {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* =================================
+   2. ENCABEZADOS DE SECCIONES
+================================= */
+
+.titulo-seccion {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.titulo-seccion span {
+    color: #8B5E3C;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.titulo-seccion h2 {
+    font-size: 32px;
+    margin: 10px 0;
+}
+
+.titulo-seccion p {
+    color: #666666;
+}
+
+/* =================================
+   3. BOTONES
+================================= */
+
+.boton-principal,
+.boton-header {
+    display: inline-block;
+    background-color: #606C38;
+    color: #FFFFFF;
+    padding: 12px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.boton-principal:hover,
+.boton-header:hover {
+    background-color: #283618;
+}
+
+/* =================================
+   4. ENCABEZADO
+================================= */
+
+.encabezado {
+    background-color: #FFFFFF;
+    padding: 20px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.encabezado .contenedor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #283618;
+    font-size: 27px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.logo span {
+    color: #8B5E3C;
+}
+
+.navegacion ul {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.navegacion a {
+    color: #283618;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.navegacion a:hover {
+    color: #8B5E3C;
+}
