@@ -167,3 +167,49 @@ body {
     object-fit: cover;
     border-radius: 15px;
 }
+
+/* =================================
+   6. SECCIÓN DE CATEGORÍAS
+================================= */
+
+.categorias {
+    padding: 70px 0;
+    background-color: #FFFFFF;
+}
+
+.categorias-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.categoria-card {
+    background-color: #F8F5EC;
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: 20px;
+    transition: 0.3s;
+}
+
+.categoria-card:hover {
+    transform: translateY(-5px);
+}
+
+.categoria-card img {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+}
+
+.categoria-card h3 {
+    color: #283618;
+    margin: 15px 10px 8px;
+    font-size: 19px;
+}
+
+.categoria-card p {
+    color: #666666;
+    font-size: 14px;
+    padding: 0 12px;
+}
