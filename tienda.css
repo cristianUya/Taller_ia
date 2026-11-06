@@ -287,6 +287,142 @@ select {
     font-size: 14px;
 }
 
+/* CARRITO LATERAL */
+
+.eco-carrito-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(25, 32, 23, 0.48);
+}
+
+.eco-carrito-panel {
+    position: absolute;
+    inset: 0 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    width: min(440px, 100%);
+    height: 100%;
+    padding: 25px;
+    background: white;
+    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+}
+
+.eco-carrito-cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--borde);
+}
+
+.eco-carrito-cabecera h2 {
+    color: var(--verde-oscuro);
+    font-family: Georgia, serif;
+}
+
+.eco-carrito-cerrar {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--verde-claro);
+    color: var(--verde-oscuro);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.eco-carrito-items {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.eco-carrito-item {
+    display: grid;
+    grid-template-columns: 76px 1fr;
+    gap: 14px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--borde);
+}
+
+.eco-carrito-item img {
+    width: 76px;
+    height: 76px;
+    border-radius: 9px;
+    object-fit: cover;
+}
+
+.eco-carrito-item h3 {
+    color: var(--verde-oscuro);
+    font-size: 15px;
+}
+
+.eco-carrito-item p {
+    color: #73786e;
+    font-size: 13px;
+}
+
+.eco-carrito-item-acciones {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 7px;
+}
+
+.eco-carrito-item-acciones button {
+    min-width: 28px;
+    min-height: 28px;
+    border: 1px solid var(--borde);
+    border-radius: 6px;
+    background: var(--crema);
+    cursor: pointer;
+}
+
+.eco-carrito-item-acciones .eco-carrito-eliminar {
+    border: 0;
+    background: transparent;
+    color: #a33b32;
+}
+
+.eco-carrito-pie {
+    padding-top: 18px;
+    border-top: 1px solid var(--borde);
+}
+
+.eco-carrito-total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    color: var(--verde-oscuro);
+    font-size: 18px;
+}
+
+.eco-carrito-pie .boton-tienda {
+    display: flex;
+    text-align: center;
+}
+
+.eco-carrito-ver-todo {
+    display: block;
+    margin-top: 12px;
+    color: var(--verde);
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.eco-carrito-vacio {
+    padding: 30px 5px;
+    color: #73786e;
+    text-align: center;
+}
+
+[hidden] {
+    display: none !important;
+}
+
 /* CARRITO */
 
 .pagina-carrito {

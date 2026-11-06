@@ -10,6 +10,44 @@ const CLAVE_PEDIDO = "ecoMarketUltimoPedido";
 let productosTienda = [];
 let carrito = [];
 
+const imagenesProducto = {
+    1: "https://images.unsplash.com/photo-1553279768-865429fa0078?w=700",
+    2: "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=700",
+    3: "https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=700",
+    4: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=700",
+    5: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=700",
+    6: "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=700",
+    7: "https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=700",
+    8: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=700",
+    9: "https://images.unsplash.com/photo-1445282768818-728615cc910a?w=700",
+    10: "https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=700",
+    11: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=700",
+    12: "https://images.unsplash.com/photo-1471943311424-646960669fbc?w=700",
+    13: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=700",
+    14: "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=700",
+    15: "https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=700",
+    16: "https://images.unsplash.com/photo-1517093157656-b9eccef91cb1?w=700",
+    17: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=700",
+    18: "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=700",
+    19: "https://images.unsplash.com/photo-1518977676601-b53f82aba655?w=700",
+    20: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=700",
+    21: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=700",
+    22: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=700",
+    23: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?w=700",
+    24: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=700",
+    25: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?w=700",
+    26: "https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?w=700",
+    27: "https://images.unsplash.com/photo-1597481499750-3e6b22637e12?w=700",
+    28: "https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?w=700",
+    29: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=700",
+    30: "https://images.unsplash.com/photo-1604335399105-a0c585fd81a1?w=700",
+    31: "https://images.unsplash.com/photo-1603006905003-be475563bc59?w=700",
+    32: "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=700",
+    33: "https://images.unsplash.com/photo-1627485937980-221c88ac04f9?w=700",
+    34: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=700",
+    35: "https://images.unsplash.com/photo-1547514701-42782101795e?w=700"
+};
+
 const formatoPrecio = (valor) => {
     return new Intl.NumberFormat("es-CO", {
         style: "currency",
@@ -20,6 +58,14 @@ const formatoPrecio = (valor) => {
 
 // Imágenes de apoyo según la categoría
 function obtenerImagen(producto) {
+    if (producto.imagen) {
+        return producto.imagen;
+    }
+
+    if (imagenesProducto[producto.id]) {
+        return imagenesProducto[producto.id];
+    }
+
     const categoria = producto.categoria.toLowerCase();
 
     if (categoria.includes("frutas")) {
@@ -69,6 +115,15 @@ async function iniciarTienda() {
 
         const pagina = document.body.dataset.page;
 
+        if (pagina === "inicio" || pagina === "catalogo") {
+            crearPanelCarrito();
+            renderizarPanelCarrito();
+        }
+
+        if (pagina === "inicio") {
+            mostrarProductosDestacados();
+        }
+
         if (pagina === "catalogo") {
             mostrarCatalogo();
             configurarFiltros();
@@ -96,6 +151,7 @@ async function iniciarTienda() {
 function guardarCarrito() {
     localStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito));
     actualizarContadorCarrito();
+    renderizarPanelCarrito();
 }
 
 function guardarProductosTienda() {
@@ -116,6 +172,183 @@ function actualizarContadorCarrito() {
 
         contador.textContent = cantidad;
     }
+}
+
+function mostrarProductosDestacados() {
+    const contenedor = document.querySelector("#productos-destacados");
+
+    if (!contenedor) return;
+
+    const destacados = [1, 4, 21]
+        .map(id => productosTienda.find(producto => producto.id === id))
+        .filter(producto => producto && producto.activo && producto.stock > 0);
+
+    contenedor.innerHTML = "";
+
+    destacados.forEach(producto => {
+        const tarjeta = document.createElement("article");
+        tarjeta.className = "eco-producto";
+        tarjeta.innerHTML = `
+            <img src="${obtenerImagen(producto)}" alt="${producto.nombre}" loading="lazy">
+            <div class="eco-producto-info">
+                <span class="eco-producto-categoria">${producto.categoria}</span>
+                <h3>${producto.nombre}</h3>
+                <p>De ${producto.productor}, ${producto.ciudad}.</p>
+                <strong class="eco-producto-precio">${formatoPrecio(producto.precio)}</strong>
+                <button type="button" class="eco-boton boton-tienda" data-agregar="${producto.id}">
+                    Agregar al carrito
+                </button>
+            </div>
+        `;
+        contenedor.appendChild(tarjeta);
+    });
+
+    contenedor.querySelectorAll("[data-agregar]").forEach(boton => {
+        boton.addEventListener("click", () => {
+            agregarAlCarrito(Number(boton.dataset.agregar));
+        });
+    });
+}
+
+function crearPanelCarrito() {
+    if (document.querySelector("#panel-carrito")) return;
+
+    const overlay = document.createElement("div");
+    overlay.className = "eco-carrito-overlay";
+    overlay.id = "panel-carrito-overlay";
+    overlay.hidden = true;
+    overlay.innerHTML = `
+        <aside
+            class="eco-carrito-panel"
+            id="panel-carrito"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="panel-carrito-titulo"
+            tabindex="-1"
+        >
+            <div class="eco-carrito-cabecera">
+                <h2 id="panel-carrito-titulo">Tu carrito</h2>
+                <button type="button" class="eco-carrito-cerrar" data-cerrar-carrito aria-label="Cerrar carrito">×</button>
+            </div>
+            <div class="eco-carrito-items" id="panel-carrito-items"></div>
+            <div class="eco-carrito-pie">
+                <div class="eco-carrito-total">
+                    <span>Subtotal</span>
+                    <strong id="panel-carrito-subtotal">$0</strong>
+                </div>
+                <a href="checkout.html" class="eco-boton boton-tienda" id="panel-carrito-checkout">
+                    Continuar con la compra
+                </a>
+                <a href="carrito.html" class="eco-carrito-ver-todo">Ver carrito completo</a>
+            </div>
+        </aside>
+    `;
+
+    document.body.appendChild(overlay);
+    overlay.addEventListener("click", evento => {
+        if (evento.target === overlay || evento.target.closest("[data-cerrar-carrito]")) {
+            ocultarPanelCarrito();
+        }
+
+        const boton = evento.target.closest("[data-panel-sumar], [data-panel-restar], [data-panel-eliminar]");
+        if (!boton) return;
+
+        const id = Number(boton.dataset.panelSumar || boton.dataset.panelRestar || boton.dataset.panelEliminar);
+
+        if (boton.hasAttribute("data-panel-sumar")) {
+            cambiarCantidad(id, 1);
+        } else if (boton.hasAttribute("data-panel-restar")) {
+            cambiarCantidad(id, -1);
+        } else {
+            eliminarDelCarrito(id);
+        }
+    });
+
+    document.querySelectorAll("[data-abrir-carrito]").forEach(enlace => {
+        enlace.addEventListener("click", evento => {
+            evento.preventDefault();
+            mostrarPanelCarrito();
+        });
+    });
+
+    document.addEventListener("keydown", evento => {
+        if (evento.key === "Escape" && !overlay.hidden) {
+            ocultarPanelCarrito();
+        }
+    });
+}
+
+function renderizarPanelCarrito() {
+    const contenedor = document.querySelector("#panel-carrito-items");
+    const subtotalElemento = document.querySelector("#panel-carrito-subtotal");
+    const checkout = document.querySelector("#panel-carrito-checkout");
+
+    if (!contenedor || !subtotalElemento) return;
+
+    const items = carrito
+        .map(item => ({
+            item,
+            producto: productosTienda.find(producto => producto.id === item.id)
+        }))
+        .filter(({ producto }) => producto);
+
+    const cantidadTotal = items.reduce((total, { item }) => total + item.cantidad, 0);
+    const subtotal = items.reduce(
+        (total, { item, producto }) => total + producto.precio * item.cantidad,
+        0
+    );
+
+    if (items.length === 0) {
+        contenedor.innerHTML = `
+            <div class="eco-carrito-vacio">
+                <p>Tu carrito está vacío.</p>
+                <p>Agrega productos frescos y sostenibles para comenzar.</p>
+            </div>
+        `;
+    } else {
+        contenedor.innerHTML = items.map(({ item, producto }) => `
+            <article class="eco-carrito-item">
+                <img src="${obtenerImagen(producto)}" alt="${producto.nombre}">
+                <div>
+                    <h3>${producto.nombre}</h3>
+                    <p>${formatoPrecio(producto.precio)} c/u</p>
+                    <div class="eco-carrito-item-acciones">
+                        <button type="button" data-panel-restar="${producto.id}" aria-label="Restar ${producto.nombre}">−</button>
+                        <strong>${item.cantidad}</strong>
+                        <button type="button" data-panel-sumar="${producto.id}" aria-label="Agregar ${producto.nombre}">+</button>
+                        <button type="button" class="eco-carrito-eliminar" data-panel-eliminar="${producto.id}">Quitar</button>
+                    </div>
+                </div>
+            </article>
+        `).join("");
+    }
+
+    subtotalElemento.textContent = formatoPrecio(subtotal);
+    checkout.setAttribute("aria-disabled", cantidadTotal === 0 ? "true" : "false");
+    checkout.style.pointerEvents = cantidadTotal === 0 ? "none" : "auto";
+    checkout.style.opacity = cantidadTotal === 0 ? "0.5" : "1";
+}
+
+function mostrarPanelCarrito() {
+    const overlay = document.querySelector("#panel-carrito-overlay");
+    if (!overlay) return;
+
+    renderizarPanelCarrito();
+    overlay.hidden = false;
+    document.querySelectorAll("[data-abrir-carrito]").forEach(enlace => {
+        enlace.setAttribute("aria-expanded", "true");
+    });
+    document.querySelector("#panel-carrito").focus();
+}
+
+function ocultarPanelCarrito() {
+    const overlay = document.querySelector("#panel-carrito-overlay");
+    if (!overlay) return;
+
+    overlay.hidden = true;
+    document.querySelectorAll("[data-abrir-carrito]").forEach(enlace => {
+        enlace.setAttribute("aria-expanded", "false");
+    });
 }
 
 // ==========================================
@@ -150,11 +383,7 @@ function mostrarCatalogo(lista = productosTienda) {
         tarjeta.className = "tarjeta-tienda";
 
         tarjeta.innerHTML = `
-            <img
-                src="${obtenerImagen(producto)}"
-                alt="${producto.nombre}"
-                loading="lazy"
-            >
+            <img src="${obtenerImagen(producto)}" alt="${producto.nombre}" loading="lazy">
 
             <div class="tarjeta-info">
                 <span class="tarjeta-categoria">
@@ -261,7 +490,11 @@ function agregarAlCarrito(id) {
 
     guardarCarrito();
 
-    alert(`${producto.nombre} fue agregado al carrito.`);
+    if (document.querySelector("#panel-carrito-overlay")) {
+        mostrarPanelCarrito();
+    } else {
+        alert(`${producto.nombre} fue agregado al carrito.`);
+    }
 }
 
 // ==========================================

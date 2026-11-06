@@ -10,6 +10,7 @@
     <title>EcoMarket | Consumo local y sostenible</title>
 
     <link rel="stylesheet" href="styles.css">
+    <script src="tienda.js" defer></script>
 
     <style>
         /* ESTILOS PRINCIPALES DE LA PÁGINA */
@@ -257,6 +258,18 @@
             font-size: 14px;
         }
 
+        .eco-producto-info .eco-producto-precio {
+            color: var(--eco-verde);
+            font-size: 19px;
+            font-weight: bold;
+        }
+
+        .eco-producto-info button {
+            border: 0;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
         .eco-producto-categoria {
             color: var(--eco-marron);
             font-size: 12px;
@@ -397,6 +410,142 @@
             font-size: 13px;
         }
 
+        /* CARRITO LATERAL */
+
+        .eco-carrito-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            background: rgba(25, 32, 23, 0.48);
+        }
+
+        .eco-carrito-panel {
+            position: absolute;
+            inset: 0 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            width: min(440px, 100%);
+            height: 100%;
+            padding: 25px;
+            background: white;
+            box-shadow: -8px 0 30px rgba(0, 0, 0, 0.15);
+            overflow-y: auto;
+        }
+
+        .eco-carrito-cabecera {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid #e6e5dc;
+        }
+
+        .eco-carrito-cabecera h2 {
+            color: var(--eco-verde-oscuro);
+            font-family: Georgia, serif;
+        }
+
+        .eco-carrito-cerrar {
+            width: 40px;
+            height: 40px;
+            border: 0;
+            border-radius: 50%;
+            background: var(--eco-verde-claro);
+            color: var(--eco-verde-oscuro);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .eco-carrito-items {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .eco-carrito-item {
+            display: grid;
+            grid-template-columns: 76px 1fr;
+            gap: 14px;
+            padding: 18px 0;
+            border-bottom: 1px solid #e6e5dc;
+        }
+
+        .eco-carrito-item img {
+            width: 76px;
+            height: 76px;
+            border-radius: 9px;
+            object-fit: cover;
+        }
+
+        .eco-carrito-item h3 {
+            color: var(--eco-verde-oscuro);
+            font-size: 15px;
+        }
+
+        .eco-carrito-item p {
+            color: #73786e;
+            font-size: 13px;
+        }
+
+        .eco-carrito-item-acciones {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 7px;
+        }
+
+        .eco-carrito-item-acciones button {
+            min-width: 28px;
+            min-height: 28px;
+            border: 1px solid #e6e5dc;
+            border-radius: 6px;
+            background: var(--eco-crema);
+            cursor: pointer;
+        }
+
+        .eco-carrito-item-acciones .eco-carrito-eliminar {
+            border: 0;
+            background: transparent;
+            color: #a33b32;
+        }
+
+        .eco-carrito-pie {
+            padding-top: 18px;
+            border-top: 1px solid #e6e5dc;
+        }
+
+        .eco-carrito-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--eco-verde-oscuro);
+            font-size: 18px;
+        }
+
+        .eco-carrito-pie .eco-boton {
+            display: block;
+            text-align: center;
+        }
+
+        .eco-carrito-ver-todo {
+            display: block;
+            margin-top: 12px;
+            color: var(--eco-verde);
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .eco-carrito-vacio {
+            padding: 30px 5px;
+            color: #73786e;
+            text-align: center;
+        }
+
+        [hidden] {
+            display: none !important;
+        }
+
         /* ADAPTACIÓN A TABLET Y CELULAR */
 
         @media (max-width: 850px) {
@@ -454,7 +603,7 @@
     </style>
 </head>
 
-<body>
+<body data-page="inicio">
 
     <!-- ENCABEZADO Y MENÚ -->
 
@@ -471,7 +620,9 @@
             <a href="#productores">Productores</a>
             <a href="#contacto">Contacto</a>
             <a href="dashboard.html">Administración</a>
-            <a href="carrito.html" class="eco-nav-boton">Mi carrito 🛒</a>
+            <a href="carrito.html" class="eco-nav-boton" data-abrir-carrito aria-expanded="false">
+                Mi carrito 🛒 <span id="contador-carrito">0</span>
+            </a>
         </nav>
 
     </header>
@@ -563,65 +714,8 @@
                     para ti y tu familia.
                 </p>
 
-                <div class="eco-productos-grid">
-
-                    <article class="eco-producto">
-                        <img
-                            src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=700"
-                            alt="Tomates frescos"
-                            loading="lazy"
-                        >
-
-                        <div class="eco-producto-info">
-                            <span class="eco-producto-categoria">
-                                FRUTAS Y VERDURAS
-                            </span>
-                            <h3>Productos frescos</h3>
-                            <p>
-                                Frutas y verduras seleccionadas
-                                de productores locales.
-                            </p>
-                        </div>
-                    </article>
-
-                    <article class="eco-producto">
-                        <img
-                            src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=700"
-                            alt="Productos de despensa"
-                            loading="lazy"
-                        >
-
-                        <div class="eco-producto-info">
-                            <span class="eco-producto-categoria">
-                                DESPENSA
-                            </span>
-                            <h3>Alimentos naturales</h3>
-                            <p>
-                                Opciones para complementar
-                                tu alimentación diaria.
-                            </p>
-                        </div>
-                    </article>
-
-                    <article class="eco-producto">
-                        <img
-                            src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=700"
-                            alt="Productos de cuidado personal"
-                            loading="lazy"
-                        >
-
-                        <div class="eco-producto-info">
-                            <span class="eco-producto-categoria">
-                                CUIDADO PERSONAL
-                            </span>
-                            <h3>Cuidado sostenible</h3>
-                            <p>
-                                Alternativas para cuidar de ti
-                                y reducir el impacto ambiental.
-                            </p>
-                        </div>
-                    </article>
-
+                <div class="eco-productos-grid" id="productos-destacados">
+                    <p class="eco-descripcion">Cargando productos...</p>
                 </div>
 
                 <a href="catalogo.html" class="eco-boton eco-ver-catalogo">
