@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi carrito | EcoMarket</title>
+    <link rel="stylesheet" href="tienda.css">
+    <script src="tienda.js" defer></script>
+</head>
+<body data-page="carrito">
+
+    <header class="tienda-header">
+        <a href="index.html" class="tienda-logo">EcoMarket<span>.</span></a>
+
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="catalogo.html">Productos</a>
+            <a href="dashboard.html">Administración</a>
+            <a href="carrito.html" class="enlace-carrito activo">
+                Mi carrito <span id="contador-carrito">0</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="contenedor-tienda pagina-carrito">
+        <section class="catalogo-portada portada-corta">
+            <span class="etiqueta-tienda">TU COMPRA RESPONSABLE</span>
+            <h1>Mi carrito de compras</h1>
+            <p>Revisa tus productos antes de continuar.</p>
+        </section>
+
+        <section class="carrito-layout">
+            <div class="carrito-contenido">
+                <div class="encabezado-carrito">
+                    <h2>Productos seleccionados</h2>
+                    <a href="catalogo.html">Seguir comprando</a>
+                </div>
+
+                <div id="lista-carrito">
+                    <p class="mensaje-carga">Cargando carrito...</p>
+                </div>
+            </div>
+
+            <aside class="resumen-carrito">
+                <h2>Resumen de compra</h2>
+
+                <div class="resumen-linea">
+                    <span>Productos</span>
+                    <strong id="resumen-cantidad">0</strong>
+                </div>
+
+                <div class="resumen-linea">
+                    <span>Subtotal</span>
+                    <strong id="resumen-subtotal">$0</strong>
+                </div>
+
+                <div class="resumen-linea total">
+                    <span>Total</span>
+                    <strong id="resumen-total">$0</strong>
+                </div>
+
+                <a href="checkout.html" id="boton-checkout" class="boton-tienda boton-comprar">
+                    Continuar con la compra
+                </a>
+
+                <p class="nota-compra">
+                    Esta es una demostración académica. No se realizarán pagos reales.
+                </p>
+            </aside>
+        </section>
+    </main>
+
+    <footer class="tienda-footer">
+        <p>© 2026 EcoMarket. Apoyamos lo local y cuidamos el planeta.</p>
+    </footer>
+
+</body>
+</html>
