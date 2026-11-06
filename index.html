@@ -4,325 +4,789 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="EcoMarket conecta productores locales con consumidores responsables.">
-    <title>EcoMarket | Productos locales y sostenibles</title>
+
+    <meta name="description" content="EcoMarket conecta productores locales con consumidores responsables. Compra productos orgánicos y sostenibles.">
+
+    <title>EcoMarket | Consumo local y sostenible</title>
+
     <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* ESTILOS PRINCIPALES DE LA PÁGINA */
+
+        :root {
+            --eco-verde: #405b38;
+            --eco-verde-oscuro: #2d4228;
+            --eco-verde-claro: #eaf0e5;
+            --eco-crema: #f8f6ef;
+            --eco-marron: #806044;
+            --eco-texto: #343a32;
+            --eco-blanco: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--eco-crema);
+            color: var(--eco-texto);
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button, input {
+            font: inherit;
+        }
+
+        .eco-contenedor {
+            width: min(1120px, 90%);
+            margin: auto;
+        }
+
+        /* NAVEGACIÓN */
+
+        .eco-header {
+            background: white;
+            padding: 16px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .eco-logo {
+            color: var(--eco-verde);
+            font-size: 28px;
+            font-weight: bold;
+            font-family: Georgia, serif;
+        }
+
+        .eco-logo span {
+            color: var(--eco-marron);
+        }
+
+        .eco-nav {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 22px;
+        }
+
+        .eco-nav a {
+            color: var(--eco-texto);
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .eco-nav a:hover {
+            color: var(--eco-verde);
+        }
+
+        .eco-nav .eco-nav-boton {
+            background: var(--eco-verde);
+            color: white;
+            padding: 10px 17px;
+            border-radius: 7px;
+        }
+
+        /* PORTADA */
+
+        .eco-hero {
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(90deg, rgba(24,42,22,0.85), rgba(24,42,22,0.25)),
+                url("https://images.unsplash.com/photo-1542838132-92c53300491e?w=1600")
+                center/cover;
+            color: white;
+        }
+
+        .eco-hero-contenido {
+            max-width: 650px;
+            padding: 75px 0;
+        }
+
+        .eco-etiqueta {
+            color: #e2d1a7;
+            font-size: 13px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .eco-hero h1 {
+            font-family: Georgia, serif;
+            font-size: clamp(38px, 6vw, 62px);
+            line-height: 1.1;
+            margin: 18px 0;
+        }
+
+        .eco-hero p {
+            font-size: 17px;
+            max-width: 540px;
+            color: #f1f1e9;
+            margin-bottom: 30px;
+        }
+
+        .eco-boton {
+            display: inline-block;
+            background: var(--eco-verde);
+            color: white;
+            padding: 13px 23px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .eco-boton:hover {
+            background: var(--eco-verde-oscuro);
+            transform: translateY(-2px);
+        }
+
+        .eco-boton-claro {
+            background: white;
+            color: var(--eco-verde-oscuro);
+        }
+
+        .eco-boton-claro:hover {
+            background: var(--eco-verde-claro);
+        }
+
+        /* BENEFICIOS */
+
+        .eco-beneficios {
+            padding: 65px 0;
+            text-align: center;
+        }
+
+        .eco-titulo {
+            color: var(--eco-verde-oscuro);
+            font-family: Georgia, serif;
+            font-size: clamp(27px, 4vw, 36px);
+            margin: 0 0 12px;
+        }
+
+        .eco-descripcion {
+            color: #73786e;
+            max-width: 650px;
+            margin: 0 auto 35px;
+        }
+
+        .eco-beneficios-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .eco-beneficio {
+            background: white;
+            padding: 28px 22px;
+            border-radius: 13px;
+            border: 1px solid #e6e5dc;
+        }
+
+        .eco-beneficio-icono {
+            font-size: 35px;
+        }
+
+        .eco-beneficio h3 {
+            color: var(--eco-verde);
+            margin: 12px 0 8px;
+        }
+
+        .eco-beneficio p {
+            color: #73786e;
+            font-size: 14px;
+        }
+
+        /* PRODUCTOS DESTACADOS */
+
+        .eco-productos {
+            background: white;
+            padding: 70px 0;
+            text-align: center;
+        }
+
+        .eco-productos-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin: 35px 0;
+            text-align: left;
+        }
+
+        .eco-producto {
+            background: var(--eco-crema);
+            border-radius: 13px;
+            overflow: hidden;
+            border: 1px solid #e6e5dc;
+        }
+
+        .eco-producto img {
+            display: block;
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+        }
+
+        .eco-producto-info {
+            padding: 19px;
+        }
+
+        .eco-producto-info h3 {
+            color: var(--eco-verde-oscuro);
+            margin: 5px 0;
+        }
+
+        .eco-producto-info p {
+            color: #73786e;
+            font-size: 14px;
+        }
+
+        .eco-producto-categoria {
+            color: var(--eco-marron);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .eco-ver-catalogo {
+            margin-top: 15px;
+        }
+
+        /* IMPACTO LOCAL */
+
+        .eco-impacto {
+            padding: 75px 0;
+            background: var(--eco-verde-claro);
+        }
+
+        .eco-impacto-contenido {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .eco-impacto img {
+            width: 100%;
+            height: 340px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .eco-impacto h2 {
+            color: var(--eco-verde-oscuro);
+            font-family: Georgia, serif;
+            font-size: 35px;
+        }
+
+        .eco-impacto p {
+            color: #60675c;
+        }
+
+        /* PRODUCTORES */
+
+        .eco-productores {
+            padding: 70px 0;
+            text-align: center;
+        }
+
+        .eco-productores-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .eco-productor {
+            background: white;
+            padding: 25px;
+            border-radius: 13px;
+            border: 1px solid #e6e5dc;
+        }
+
+        .eco-productor h3 {
+            color: var(--eco-verde);
+        }
+
+        .eco-productor p {
+            color: #73786e;
+            font-size: 14px;
+        }
+
+        /* SUSCRIPCIÓN */
+
+        .eco-suscripcion {
+            background: var(--eco-verde-oscuro);
+            color: white;
+            padding: 65px 20px;
+            text-align: center;
+        }
+
+        .eco-suscripcion h2 {
+            font-family: Georgia, serif;
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .eco-suscripcion p {
+            color: #e1e6dc;
+        }
+
+        .eco-formulario {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            max-width: 530px;
+            margin: 25px auto 0;
+        }
+
+        .eco-formulario input {
+            flex: 1;
+            min-width: 0;
+            padding: 13px;
+            border: none;
+            border-radius: 7px;
+        }
+
+        .eco-formulario button {
+            border: none;
+            cursor: pointer;
+        }
+
+        /* CONTACTO Y PIE DE PÁGINA */
+
+        .eco-contacto {
+            background: white;
+            padding: 55px 0;
+            text-align: center;
+        }
+
+        .eco-contacto p {
+            color: #73786e;
+        }
+
+        .eco-footer {
+            background: #24351f;
+            color: white;
+            padding: 30px 5%;
+            text-align: center;
+        }
+
+        .eco-footer p {
+            font-size: 13px;
+            color: #dce3d7;
+        }
+
+        .eco-footer a {
+            color: white;
+            margin: 0 8px;
+            font-size: 13px;
+        }
+
+        /* ADAPTACIÓN A TABLET Y CELULAR */
+
+        @media (max-width: 850px) {
+            .eco-header {
+                flex-direction: column;
+            }
+
+            .eco-nav {
+                justify-content: center;
+                gap: 14px;
+            }
+
+            .eco-beneficios-grid,
+            .eco-productos-grid,
+            .eco-productores-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .eco-impacto-contenido {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .eco-nav {
+                gap: 12px;
+            }
+
+            .eco-nav a {
+                font-size: 12px;
+            }
+
+            .eco-hero {
+                min-height: 440px;
+            }
+
+            .eco-beneficios-grid,
+            .eco-productos-grid,
+            .eco-productores-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .eco-formulario {
+                flex-direction: column;
+            }
+
+            .eco-formulario button {
+                width: 100%;
+            }
+
+            .eco-impacto img {
+                height: 240px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  
-<!-- ENCABEZADO -->
-<header class="encabezado">
-    <div class="contenedor">
 
-        <a href="#" class="logo">EcoMarket<span>.</span></a>
+    <!-- ENCABEZADO Y MENÚ -->
 
-        <nav class="navegacion">
-            <ul>
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#categorias">Categorías</a></li>
-                <li><a href="#productos">Productos</a></li>
-                <li><a href="#productores">Productores</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
+    <header class="eco-header">
 
-        <a href="#productos" class="boton-header">Explorar productos</a>
+        <a href="index.html" class="eco-logo">
+            EcoMarket<span>.</span>
+        </a>
 
-    </div>
-</header>
-<!-- SECCIÓN PRINCIPAL -->
-<section class="hero" id="inicio">
-
-    <div class="contenedor hero-contenido">
-
-        <div class="hero-texto">
-            <span class="etiqueta">CONSUMO LOCAL Y RESPONSABLE</span>
-
-            <h1>Lo natural llega a tu hogar</h1>
-
-            <p>
-                Descubre productos frescos, orgánicos y sostenibles
-                de pequeños productores locales. Compra consciente,
-                apoya lo nuestro y cuida el planeta.
-            </p>
-
-            <a href="#productos" class="boton-principal">
-                Conoce nuestros productos
-            </a>
-        </div>
-
-        <div class="hero-imagen">
-            <img
-                src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=900"
-                alt="Frutas y verduras frescas de productores locales"
-            >
-        </div>
-
-    </div>
-
-</section>
-
-<!-- SECCIÓN DE CATEGORÍAS -->
-<section class="categorias" id="categorias">
-
-    <div class="contenedor">
-
-        <div class="titulo-seccion">
-            <span>EXPLORA ECO MARKET</span>
-            <h2>Encuentra lo que necesitas</h2>
-            <p>Productos naturales para una vida más consciente.</p>
-        </div>
-
-        <div class="categorias-grid">
-
-            <article class="categoria-card">
-                <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=600"
-                     alt="Frutas frescas">
-                <h3>Frutas y verduras</h3>
-                <p>Alimentos frescos y naturales.</p>
-            </article>
-
-            <article class="categoria-card">
-                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600"
-                     alt="Productos de despensa">
-                <h3>Despensa</h3>
-                <p>Productos esenciales para tu hogar.</p>
-            </article>
-
-            <article class="categoria-card">
-                <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600"
-                     alt="Productos de cuidado personal">
-                <h3>Cuidado personal</h3>
-                <p>Cuida de ti con opciones naturales.</p>
-            </article>
-
-            <article class="categoria-card">
-                <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=600"
-                     alt="Productos sostenibles para el hogar">
-                <h3>Hogar sostenible</h3>
-                <p>Alternativas amigables con el planeta.</p>
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- SECCIÓN DE PRODUCTOS -->
-<section class="productos" id="productos">
-
-    <div class="contenedor">
-
-        <div class="titulo-seccion">
-            <span>SELECCIÓN ESPECIAL</span>
-            <h2>Nuestros productos destacados</h2>
-            <p>Calidad natural directamente de nuestros productores.</p>
-        </div>
-
-        <div class="productos-grid">
-
-            <article class="producto-card">
-                <img src="https://images.unsplash.com/photo-1543168256-418811576931?w=600"
-                     alt="Canasta de frutas frescas">
-                <div class="producto-info">
-                    <span>Frutas y verduras</span>
-                    <h3>Canasta de frutas</h3>
-                    <p>Selección de frutas frescas de temporada.</p>
-                    <strong>$25.000 COP</strong>
-                </div>
-            </article>
-
-            <article class="producto-card">
-                <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=600"
-                     alt="Verduras frescas y naturales">
-                <div class="producto-info">
-                    <span>Frutas y verduras</span>
-                    <h3>Verduras orgánicas</h3>
-                    <p>Verduras cultivadas de manera responsable.</p>
-                    <strong>$18.000 COP</strong>
-                </div>
-            </article>
-
-            <article class="producto-card">
-                <img src="https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=600"
-                     alt="Frasco de miel natural">
-                <div class="producto-info">
-                    <span>Despensa</span>
-                    <h3>Miel natural</h3>
-                    <p>Miel artesanal de productores locales.</p>
-                    <strong>$22.000 COP</strong>
-                </div>
-            </article>
-
-            <article class="producto-card">
-                <img src="https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=600"
-                     alt="Productos naturales para el cuidado personal">
-                <div class="producto-info">
-                    <span>Cuidado personal</span>
-                    <h3>Kit de cuidado natural</h3>
-                    <p>Productos elaborados con ingredientes naturales.</p>
-                    <strong>$35.000 COP</strong>
-                </div>
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- SECCIÓN DE BENEFICIOS -->
-<section class="beneficios">
-
-    <div class="contenedor">
-
-        <div class="titulo-seccion">
-            <span>NUESTRO PROPÓSITO</span>
-            <h2>Compra local, genera impacto</h2>
-            <p>Cada compra puede ayudar a construir un futuro más sostenible.</p>
-        </div>
-
-        <div class="beneficios-grid">
-
-            <article class="beneficio-card">
-                <div class="beneficio-icono">🌱</div>
-                <h3>Cuida el planeta</h3>
-                <p>Promovemos el consumo responsable y el cuidado del medio ambiente.</p>
-            </article>
-
-            <article class="beneficio-card">
-                <div class="beneficio-icono">🤝</div>
-                <h3>Apoya lo local</h3>
-                <p>Conectamos a los consumidores con pequeños productores colombianos.</p>
-            </article>
-
-            <article class="beneficio-card">
-                <div class="beneficio-icono">🥬</div>
-                <h3>Consume natural</h3>
-                <p>Encuentra alternativas frescas y productos elaborados responsablemente.</p>
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- SECCIÓN DE PRODUCTORES -->
-<section class="productores" id="productores">
-
-    <div class="contenedor">
-
-        <div class="titulo-seccion">
-            <span>PERSONAS QUE HACEN LA DIFERENCIA</span>
-            <h2>Conoce a nuestros productores</h2>
-            <p>Historias de personas que trabajan por un consumo más responsable.</p>
-        </div>
-
-        <div class="productores-grid">
-
-            <article class="productor-card">
-                <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600"
-                     alt="Cultivo agrícola de un productor local">
-                <div class="productor-info">
-                    <h3>María Rodríguez</h3>
-                    <span>Productora de frutas y verduras</span>
-                    <p>
-                        Cultiva alimentos frescos utilizando prácticas
-                        responsables con el medio ambiente.
-                    </p>
-                </div>
-            </article>
-
-            <article class="productor-card">
-                <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600"
-                     alt="Productor trabajando en un cultivo">
-                <div class="productor-info">
-                    <h3>Andrés Martínez</h3>
-                    <span>Productor de alimentos orgánicos</span>
-                    <p>
-                        Trabaja para ofrecer productos naturales
-                        y apoyar el desarrollo de su comunidad.
-                    </p>
-                </div>
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- SECCIÓN DE SUSCRIPCIÓN -->
-<section class="suscripcion" id="contacto">
-
-    <div class="contenedor suscripcion-contenido">
-
-        <div class="suscripcion-texto">
-            <span>MANTENTE CONECTADO</span>
-            <h2>Recibe novedades de EcoMarket</h2>
-            <p>
-                Suscríbete y conoce nuestros nuevos productos,
-                promociones y consejos para una vida sostenible.
-            </p>
-        </div>
-
-        <form class="formulario-suscripcion">
-
-            <div class="campo">
-                <label for="nombre">Nombre completo</label>
-                <input type="text" id="nombre" name="nombre"
-                       placeholder="Escribe tu nombre" required>
-            </div>
-
-            <div class="campo">
-                <label for="correo">Correo electrónico</label>
-                <input type="email" id="correo" name="correo"
-                       placeholder="ejemplo@correo.com" required>
-            </div>
-
-            <button type="submit" class="boton-principal">
-                Suscribirme
-            </button>
-
-        </form>
-
-    </div>
-
-</section>
-
-<!-- PIE DE PÁGINA -->
-<footer class="footer">
-
-    <div class="contenedor footer-contenido">
-
-        <div class="footer-info">
-            <a href="#inicio" class="logo">EcoMarket<span>.</span></a>
-            <p>
-                Conectamos productores locales con personas
-                que quieren consumir de manera responsable.
-            </p>
-        </div>
-
-        <div class="footer-enlaces">
-            <h3>Enlaces rápidos</h3>
+        <nav class="eco-nav" aria-label="Navegación principal">
             <a href="#inicio">Inicio</a>
-            <a href="#categorias">Categorías</a>
-            <a href="#productos">Productos</a>
+            <a href="catalogo.html">Productos</a>
+            <a href="#beneficios">Beneficios</a>
             <a href="#productores">Productores</a>
             <a href="#contacto">Contacto</a>
-        </div>
+            <a href="dashboard.html">Administración</a>
+            <a href="carrito.html" class="eco-nav-boton">Mi carrito 🛒</a>
+        </nav>
 
-    </div>
+    </header>
 
-    <div class="footer-final">
-        <p>&copy; 2026 EcoMarket. Todos los derechos reservados.</p>
-    </div>
+    <main>
 
-</footer>
+        <!-- SECCIÓN PRINCIPAL -->
 
-    <script src="app.js"></script>
+        <section class="eco-hero" id="inicio">
+            <div class="eco-contenedor">
+                <div class="eco-hero-contenido">
+
+                    <span class="eco-etiqueta">
+                        CONSUMO LOCAL Y RESPONSABLE
+                    </span>
+
+                    <h1>Un mundo más natural comienza con tus compras</h1>
+
+                    <p>
+                        Encuentra productos orgánicos y sostenibles,
+                        apoya a pequeños productores colombianos
+                        y contribuye al cuidado del medio ambiente.
+                    </p>
+
+                    <a href="catalogo.html" class="eco-boton eco-boton-claro">
+                        Comprar productos
+                    </a>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- BENEFICIOS -->
+
+        <section class="eco-beneficios" id="beneficios">
+            <div class="eco-contenedor">
+
+                <h2 class="eco-titulo">
+                    ¿Por qué elegir EcoMarket?
+                </h2>
+
+                <p class="eco-descripcion">
+                    Creemos en una forma de consumir más consciente,
+                    responsable y cercana a quienes producen nuestros alimentos.
+                </p>
+
+                <div class="eco-beneficios-grid">
+
+                    <article class="eco-beneficio">
+                        <div class="eco-beneficio-icono">🌱</div>
+                        <h3>Productos naturales</h3>
+                        <p>
+                            Encuentra alternativas orgánicas y sostenibles
+                            para tu hogar y tu alimentación.
+                        </p>
+                    </article>
+
+                    <article class="eco-beneficio">
+                        <div class="eco-beneficio-icono">🤝</div>
+                        <h3>Apoyo local</h3>
+                        <p>
+                            Ayudamos a pequeños productores colombianos
+                            a llegar a nuevos consumidores.
+                        </p>
+                    </article>
+
+                    <article class="eco-beneficio">
+                        <div class="eco-beneficio-icono">🌍</div>
+                        <h3>Consumo responsable</h3>
+                        <p>
+                            Promovemos decisiones de compra que
+                            contribuyen al cuidado del planeta.
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCTOS DESTACADOS -->
+
+        <section class="eco-productos" id="productos">
+            <div class="eco-contenedor">
+
+                <h2 class="eco-titulo">Nuestros productos</h2>
+
+                <p class="eco-descripcion">
+                    Conoce algunas de las opciones que tenemos
+                    para ti y tu familia.
+                </p>
+
+                <div class="eco-productos-grid">
+
+                    <article class="eco-producto">
+                        <img
+                            src="https://images.unsplash.com/photo-1546094096-0df4bcaaa337?w=700"
+                            alt="Tomates frescos"
+                            loading="lazy"
+                        >
+
+                        <div class="eco-producto-info">
+                            <span class="eco-producto-categoria">
+                                FRUTAS Y VERDURAS
+                            </span>
+                            <h3>Productos frescos</h3>
+                            <p>
+                                Frutas y verduras seleccionadas
+                                de productores locales.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="eco-producto">
+                        <img
+                            src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=700"
+                            alt="Productos de despensa"
+                            loading="lazy"
+                        >
+
+                        <div class="eco-producto-info">
+                            <span class="eco-producto-categoria">
+                                DESPENSA
+                            </span>
+                            <h3>Alimentos naturales</h3>
+                            <p>
+                                Opciones para complementar
+                                tu alimentación diaria.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="eco-producto">
+                        <img
+                            src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=700"
+                            alt="Productos de cuidado personal"
+                            loading="lazy"
+                        >
+
+                        <div class="eco-producto-info">
+                            <span class="eco-producto-categoria">
+                                CUIDADO PERSONAL
+                            </span>
+                            <h3>Cuidado sostenible</h3>
+                            <p>
+                                Alternativas para cuidar de ti
+                                y reducir el impacto ambiental.
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+
+                <a href="catalogo.html" class="eco-boton eco-ver-catalogo">
+                    Ver todos los productos
+                </a>
+
+            </div>
+        </section>
+
+        <!-- IMPACTO LOCAL -->
+
+        <section class="eco-impacto">
+            <div class="eco-contenedor eco-impacto-contenido">
+
+                <div>
+                    <span class="eco-etiqueta">
+                        JUNTOS HACEMOS LA DIFERENCIA
+                    </span>
+
+                    <h2>Comprar local también es cuidar el planeta</h2>
+
+                    <p>
+                        Detrás de cada producto hay personas que trabajan
+                        con dedicación para ofrecer alternativas de calidad.
+                        Al comprar en EcoMarket, apoyas a los productores
+                        locales y fortaleces el comercio responsable.
+                    </p>
+
+                    <a href="catalogo.html" class="eco-boton">
+                        Explorar catálogo
+                    </a>
+                </div>
+
+                <img
+                    src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=900"
+                    alt="Cultivo agrícola y naturaleza"
+                    loading="lazy"
+                >
+
+            </div>
+        </section>
+
+        <!-- PRODUCTORES -->
+
+        <section class="eco-productores" id="productores">
+            <div class="eco-contenedor">
+
+                <h2 class="eco-titulo">
+                    Conoce a nuestros productores
+                </h2>
+
+                <p class="eco-descripcion">
+                    Trabajamos para dar visibilidad a quienes
+                    hacen posible un consumo más responsable.
+                </p>
+
+                <div class="eco-productores-grid">
+
+                    <article class="eco-productor">
+                        <div class="eco-beneficio-icono">👨‍🌾</div>
+                        <h3>Productores locales</h3>
+                        <p>
+                            Pequeños agricultores que trabajan
+                            para ofrecer productos frescos.
+                        </p>
+                    </article>
+
+                    <article class="eco-productor">
+                        <div class="eco-beneficio-icono">🌿</div>
+                        <h3>Prácticas sostenibles</h3>
+                        <p>
+                            Promovemos alternativas que buscan
+                            un mejor cuidado del medio ambiente.
+                        </p>
+                    </article>
+
+                    <article class="eco-productor">
+                        <div class="eco-beneficio-icono">💚</div>
+                        <h3>Comercio responsable</h3>
+                        <p>
+                            Conectamos a los productores
+                            con consumidores comprometidos.
+                        </p>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SUSCRIPCIÓN -->
+
+        <section class="eco-suscripcion">
+            <div class="eco-contenedor">
+
+                <h2>Forma parte de EcoMarket</h2>
+
+                <p>
+                    Mantente informado sobre nuevos productos
+                    y novedades de nuestra comunidad.
+                </p>
+
+                <form class="eco-formulario formulario-suscripcion">
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        placeholder="Tu nombre"
+                        required
+                    >
+
+                    <input
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        placeholder="Tu correo electrónico"
+                        required
+                    >
+
+                    <button type="submit" class="eco-boton eco-boton-claro">
+                        Suscribirme
+                    </button>
+
+                </form>
+
+            </div>
+        </section>
+
+        <!-- CONTACTO -->
+
+        <section class="eco-contacto" id="contacto">
+            <div class="eco-contenedor">
+
+                <h2 class="eco-titulo">¿Quieres conocer más?</h2>
+
+                <p>
+                    Explora nuestro catálogo y descubre
+                    nuevas formas de consumir responsablemente.
+                </p>
+
+                <a href="catalogo.html" class="eco-boton">
+                    Visitar EcoMarket
+                </a>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+
+    <footer class="eco-footer">
+        <a href="index.html">EcoMarket</a>
+        <a href="catalogo.html">Productos</a>
+        <a href="carrito.html">Carrito</a>
+        <a href="dashboard.html">Administración</a>
+
+        <p>
+            © 2026 EcoMarket. Apoyamos lo local y cuidamos el planeta.
+        </p>
+
+        <p>
+            Proyecto académico de desarrollo web.
+        </p>
+    </footer>
+
 </body>
 </html>
