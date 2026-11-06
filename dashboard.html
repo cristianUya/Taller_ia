@@ -1,0 +1,300 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EcoMarket | Panel administrativo</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/validacion.js" defer></script>
+    <script src="app.js" defer></script>
+</head>
+
+<body class="panel">
+
+    <button id="boton-menu" class="boton-menu"
+        aria-label="Abrir menú" aria-expanded="false">
+        ☰
+    </button>
+
+    <aside class="sidebar">
+
+        <a class="marca" href="index.html">
+            EcoMarket<span>.</span>
+        </a>
+
+        <nav aria-label="Navegación administrativa">
+            <a href="#resumen">Resumen</a>
+            <a href="#inventario">Inventario</a>
+            <a href="#estadisticas">Estadísticas</a>
+            <a href="index.html">Ver tienda</a>
+        </nav>
+
+    </aside>
+
+    <main class="contenido-panel">
+
+        <header class="panel-cabecera" id="resumen">
+
+            <div>
+                <p class="sobre-titulo">PANEL ADMINISTRATIVO</p>
+
+                <h1>Inventario de EcoMarket</h1>
+
+                <p>
+                    Bienvenido. Aquí puedes administrar los productos de la tienda.
+                </p>
+            </div>
+
+            <button id="nuevo-producto" class="boton">
+                + Nuevo producto
+            </button>
+
+        </header>
+
+        <!-- INDICADORES -->
+
+        <section class="indicadores">
+
+            <article class="indicador">
+                <span>Productos activos</span>
+                <strong id="kpi-total">0</strong>
+            </article>
+
+            <article class="indicador">
+                <span>Productos con stock bajo</span>
+                <strong id="kpi-bajo">0</strong>
+            </article>
+
+            <article class="indicador">
+                <span>Valor del inventario</span>
+                <strong id="kpi-valor">$0</strong>
+            </article>
+
+        </section>
+
+        <!-- INVENTARIO -->
+
+        <section class="bloque" id="inventario">
+
+            <div class="bloque-titulo">
+                <div>
+                    <h2>Inventario de productos</h2>
+                    <p id="total-resultados">0 productos</p>
+                </div>
+            </div>
+
+            <!-- FILTROS -->
+
+            <div class="filtros">
+
+                <input
+                    id="buscar-producto"
+                    type="search"
+                    placeholder="Buscar producto o productor"
+                    aria-label="Buscar producto o productor"
+                >
+
+                <select id="filtro-categoria" aria-label="Filtrar por categoría">
+                    <option value="">Todas las categorías</option>
+                    <option>Frutas y verduras</option>
+                    <option>Despensa</option>
+                    <option>Cuidado personal</option>
+                    <option>Hogar sostenible</option>
+                </select>
+
+                <select id="filtro-ciudad" aria-label="Filtrar por ciudad">
+                    <option value="">Todas las ciudades</option>
+                    <option>Bucaramanga</option>
+                    <option>Floridablanca</option>
+                    <option>Girón</option>
+                    <option>Bogotá</option>
+                    <option>Medellín</option>
+                    <option>Cali</option>
+                    <option>Tunja</option>
+                    <option>Cúcuta</option>
+                </select>
+
+                <select id="filtro-estado" aria-label="Filtrar por estado">
+                    <option value="">Todos los estados</option>
+                    <option>Disponible</option>
+                    <option>Stock bajo</option>
+                    <option>Agotado</option>
+                </select>
+
+                <button id="limpiar-filtros" class="boton-secundario">
+                    Limpiar filtros
+                </button>
+
+            </div>
+
+            <!-- TABLA -->
+
+            <div class="tabla-contenedor">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Producto</th>
+                            <th>Categoría</th>
+                            <th>Precio COP</th>
+                            <th>Stock</th>
+                            <th>Productor</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tabla-productos"></tbody>
+
+                </table>
+
+            </div>
+
+            <div id="productos-tarjetas" class="productos-tarjetas"></div>
+
+        </section>
+
+        <!-- GRÁFICO -->
+
+        <section class="bloque" id="estadisticas">
+
+            <h2>Productos por categoría</h2>
+
+            <div class="grafico">
+                <canvas
+                    id="grafico-categorias"
+                    aria-label="Gráfico de productos por categoría">
+                </canvas>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- MODAL PARA AGREGAR Y EDITAR PRODUCTOS -->
+
+    <dialog id="modal-producto">
+
+        <form id="form-producto" class="form-modal">
+
+            <div class="modal-cabecera">
+
+                <h2 id="modal-titulo">Agregar producto</h2>
+
+                <button
+                    type="button"
+                    id="cerrar-modal"
+                    class="cerrar"
+                    aria-label="Cerrar">
+                    ×
+                </button>
+
+            </div>
+
+            <input type="hidden" id="producto-id">
+
+            <label>
+                Nombre
+                <input id="nombre-producto" required minlength="3" maxlength="80">
+            </label>
+
+            <label>
+                Categoría
+                <select id="categoria-producto" required>
+                    <option value="">Selecciona</option>
+                    <option>Frutas y verduras</option>
+                    <option>Despensa</option>
+                    <option>Cuidado personal</option>
+                    <option>Hogar sostenible</option>
+                </select>
+            </label>
+
+            <div class="dos-columnas">
+
+                <label>
+                    Precio (COP)
+                    <input id="precio-producto" type="number" min="1" step="1" required>
+                </label>
+
+                <label>
+                    Stock
+                    <input id="stock-producto" type="number" min="0" step="1" required>
+                </label>
+
+                <label>
+                    Stock mínimo
+                    <input id="minimo-producto" type="number" min="0" step="1" required>
+                </label>
+
+                <label>
+                    Ciudad
+                    <select id="ciudad-producto" required>
+                        <option value="">Selecciona</option>
+                        <option>Bucaramanga</option>
+                        <option>Floridablanca</option>
+                        <option>Girón</option>
+                        <option>Bogotá</option>
+                        <option>Medellín</option>
+                        <option>Cali</option>
+                        <option>Tunja</option>
+                        <option>Cúcuta</option>
+                    </select>
+                </label>
+
+            </div>
+
+            <label>
+                Productor
+                <input id="productor-producto" required minlength="3" maxlength="80">
+            </label>
+
+            <label>
+                Fecha de registro
+                <input
+                    id="fecha-producto"
+                    type="date"
+                    min="2026-01-01"
+                    max="2026-11-03"
+                    required>
+            </label>
+
+            <div class="checks">
+
+                <label>
+                    <input id="organico-producto" type="checkbox">
+                    Orgánico
+                </label>
+
+                <label>
+                    <input id="activo-producto" type="checkbox" checked>
+                    Activo
+                </label>
+
+            </div>
+
+            <div class="acciones-modal">
+
+                <button type="button" id="cancelar-modal" class="boton-secundario">
+                    Cancelar
+                </button>
+
+                <button type="submit" class="boton">
+                    Guardar producto
+                </button>
+
+            </div>
+
+        </form>
+
+    </dialog>
+
+</body>
+</html>
