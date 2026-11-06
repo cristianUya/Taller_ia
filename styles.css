@@ -274,3 +274,375 @@ body {
     color: #606C38;
     font-size: 17px;
 }
+
+
+/* =================================
+   8. SECCIÓN DE BENEFICIOS
+================================= */
+
+.beneficios {
+    padding: 80px 0;
+    background-color: #FFFFFF;
+}
+
+.beneficios-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.beneficio-card {
+    background-color: #F8F5EC;
+    padding: 35px 25px;
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.beneficio-card:hover {
+    transform: translateY(-5px);
+}
+
+.beneficio-icono {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.beneficio-card h3 {
+    color: #283618;
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.beneficio-card p {
+    color: #666666;
+    font-size: 15px;
+}
+
+
+/* =================================
+   9. SECCIÓN DE PRODUCTORES
+================================= */
+
+.productores {
+    padding: 80px 0;
+    background-color: #F8F5EC;
+}
+
+.productores-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.productor-card {
+    display: flex;
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+.productor-card:hover {
+    transform: translateY(-5px);
+}
+
+.productor-card img {
+    width: 45%;
+    min-height: 230px;
+    object-fit: cover;
+}
+
+.productor-info {
+    padding: 25px;
+}
+
+.productor-info h3 {
+    color: #283618;
+    margin-bottom: 8px;
+}
+
+.productor-info span {
+    color: #8B5E3C;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.productor-info p {
+    color: #666666;
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+
+/* =================================
+   10. SECCIÓN DE SUSCRIPCIÓN
+================================= */
+
+.suscripcion {
+    padding: 80px 0;
+    background-color: #606C38;
+    color: #FFFFFF;
+}
+
+.suscripcion-contenido {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 50px;
+}
+
+.suscripcion-texto span {
+    color: #E5D8B5;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.suscripcion-texto h2 {
+    font-size: 32px;
+    margin: 15px 0;
+}
+
+.suscripcion-texto p {
+    color: #F0EFE8;
+}
+
+.formulario-suscripcion {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.campo label {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.campo input {
+    padding: 14px;
+    border: 1px solid #DDDDDD;
+    border-radius: 6px;
+    font-size: 15px;
+    outline: none;
+}
+
+.campo input:focus {
+    border-color: #E5D8B5;
+    box-shadow: 0 0 0 2px rgba(229, 216, 181, 0.3);
+}
+
+.formulario-suscripcion .boton-principal {
+    border: none;
+    cursor: pointer;
+    background-color: #283618;
+}
+
+.formulario-suscripcion .boton-principal:hover {
+    background-color: #FFFFFF;
+    color: #283618;
+}
+
+
+/* =================================
+   11. PIE DE PÁGINA
+================================= */
+
+.footer {
+    background-color: #283618;
+    color: #FFFFFF;
+    padding-top: 55px;
+}
+
+.footer-contenido {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 50px;
+    padding-bottom: 40px;
+}
+
+.footer .logo {
+    color: #FFFFFF;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.footer-info p {
+    color: #D6D6C8;
+    max-width: 400px;
+    font-size: 14px;
+}
+
+.footer-enlaces {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.footer-enlaces h3 {
+    margin-bottom: 8px;
+}
+
+.footer-enlaces a {
+    color: #D6D6C8;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-enlaces a:hover {
+    color: #DDA15E;
+}
+
+.footer-final {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.footer-final p {
+    color: #D6D6C8;
+    font-size: 13px;
+}
+
+
+/* =================================
+   12. DISEÑO RESPONSIVE - TABLETAS
+================================= */
+
+@media (max-width: 900px) {
+
+    .encabezado .contenedor {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .navegacion ul {
+        gap: 15px;
+    }
+
+    .hero-texto h1 {
+        font-size: 38px;
+    }
+
+    .categorias-grid,
+    .productos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .beneficios-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .productores-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .suscripcion-contenido {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =================================
+   13. DISEÑO RESPONSIVE - CELULARES
+================================= */
+
+@media (max-width: 600px) {
+
+    .encabezado {
+        padding: 20px 0;
+    }
+
+    .encabezado .contenedor {
+        flex-direction: column;
+    }
+
+    .navegacion ul {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .navegacion a {
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 45px 0;
+    }
+
+    .hero-contenido {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .hero-texto h1 {
+        font-size: 34px;
+    }
+
+    .hero-imagen img {
+        height: 260px;
+    }
+
+    .titulo-seccion h2 {
+        font-size: 25px;
+    }
+
+    .categorias,
+    .productos,
+    .beneficios,
+    .productores {
+        padding: 50px 0;
+    }
+
+    .categorias-grid,
+    .productos-grid,
+    .beneficios-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .productor-card {
+        flex-direction: column;
+    }
+
+    .productor-card img {
+        width: 100%;
+        height: 220px;
+    }
+
+    .suscripcion {
+        padding: 50px 0;
+    }
+
+    .suscripcion-texto h2 {
+        font-size: 26px;
+    }
+
+    .footer-contenido {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .boton-header {
+        font-size: 13px;
+    }
+}
+
+
+/* =================================
+   14. ACCESIBILIDAD
+================================= */
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid #DDA15E;
+    outline-offset: 3px;
+}
