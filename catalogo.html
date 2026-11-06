@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Compra productos locales, orgánicos y sostenibles en EcoMarket.">
+    <title>Catálogo | EcoMarket</title>
+    <link rel="stylesheet" href="tienda.css">
+    <script src="tienda.js" defer></script>
+</head>
+<body data-page="catalogo">
+
+    <header class="tienda-header">
+        <a href="index.html" class="tienda-logo">EcoMarket<span>.</span></a>
+
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="catalogo.html" class="activo">Productos</a>
+            <a href="dashboard.html">Administración</a>
+            <a href="carrito.html" class="enlace-carrito">
+                Mi carrito <span id="contador-carrito">0</span>
+            </a>
+        </nav>
+    </header>
+
+    <main class="contenedor-tienda">
+        <section class="catalogo-portada">
+            <span class="etiqueta-tienda">CONSUMO LOCAL Y RESPONSABLE</span>
+            <h1>Productos naturales para tu hogar</h1>
+            <p>Compra directamente a pequeños productores y apoya el consumo sostenible.</p>
+        </section>
+
+        <section class="catalogo-seccion">
+            <div class="catalogo-titulo">
+                <div>
+                    <h2>Nuestro catálogo</h2>
+                    <p>Encuentra productos frescos y sostenibles.</p>
+                </div>
+                <span id="cantidad-productos">Cargando productos...</span>
+            </div>
+
+            <div class="filtros-tienda">
+                <input
+                    type="search"
+                    id="buscar-tienda"
+                    placeholder="Buscar un producto..."
+                    aria-label="Buscar productos"
+                >
+
+                <select id="categoria-tienda" aria-label="Filtrar por categoría">
+                    <option value="">Todas las categorías</option>
+                    <option value="Frutas y verduras">Frutas y verduras</option>
+                    <option value="Despensa">Despensa</option>
+                    <option value="Cuidado personal">Cuidado personal</option>
+                    <option value="Hogar sostenible">Hogar sostenible</option>
+                </select>
+            </div>
+
+            <div id="catalogo-productos" class="catalogo-grid">
+                <p class="mensaje-carga">Cargando productos...</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="tienda-footer">
+        <p>© 2026 EcoMarket. Apoyamos lo local y cuidamos el planeta.</p>
+    </footer>
+
+</body>
+</html>
